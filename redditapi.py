@@ -2,6 +2,7 @@
 import requests
 import json
 import bs4
+import os
 from flask import Flask, jsonify
 from flask import make_response
  
@@ -31,7 +32,7 @@ def get_news(category='',cattype=0):
     index_url="https://www.reddit.com/"
     response=requests.get(index_url+category)
     ret=[]
-    soup = bs4.BeautifulSoup(response.text)
+    soup = bs4.BeautifulSoup(response.text, "html5lib")
     posts=soup.select("div#siteTable div.thing")
     for post in posts:
         info=post.select("p.title a")[0]
@@ -47,4 +48,6 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.debug = True
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
