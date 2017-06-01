@@ -1,1 +1,1 @@
-web: redditapi.py
+web: python3 flask_app.py
