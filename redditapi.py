@@ -2,6 +2,7 @@
 import requests
 import json
 import bs4
+import os
 from flask import Flask, jsonify
 from flask import make_response
  

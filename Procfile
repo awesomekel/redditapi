@@ -1,1 +1,1 @@
-web: python3 redditapi.py
+web: python redditapi.py
